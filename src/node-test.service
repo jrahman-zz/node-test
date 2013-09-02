@@ -1,0 +1,12 @@
+[Service]
+ExecStart=/usr/bin/node /srv/node-test/node-test.js
+Restart=always
+StandardOutput=syslog
+SyslogIdentifier=node-test
+User=nobody
+Group=nobody
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=development
+
+[Install]
+WantedBy=multi-user.target
