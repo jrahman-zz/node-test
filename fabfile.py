@@ -13,6 +13,7 @@ repo="ssh://git@github.com/jrahman/node-test.git"
 def full_deploy():
 	execute(deploy_files)
 	execute(start_node)
+	execute(cleanup)
 
 @task
 def start_node():
@@ -28,6 +29,7 @@ def deploy_files():
 		run("git clone " + repo)
 		sudo("cp node-test/src/node-test.{js,service} " + dest_directory)
 		sudo("cp node-test/src/node-test-nginx.conf /etc/nginx/conf.d/")
+		sudo("cp node-test/src/node-test-apache.conf /etc/httpd/conf.d/")
 
 @task
 def cleanup():
