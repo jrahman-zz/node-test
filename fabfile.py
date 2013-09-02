@@ -12,10 +12,11 @@ repo="ssh://git@github.com/jrahman/node-test.git"
 @task
 def full_deploy():
 	execute(deploy_files)
-	excute(start_node)
+	execute(start_node)
 
 @task
 def start_node():
+	sudo("systemctl start nginx.service")
 	sudo("systemctl enable /srv/node-test/node-test.service")
 	sudo("systemctl start node-test.service")
 
@@ -26,7 +27,7 @@ def deploy_files():
 		run('ls')
 		run("git clone " + repo)
 		sudo("cp node-test/src/node-test.{js,service} " + dest_directory)
-		sudo("cp node-test/src/node-test-nginx.conf /etc/nginx/")
+		sudo("cp node-test/src/node-test-nginx.conf /etc/nginx/conf.d/")
 
 @task
 def cleanup():
