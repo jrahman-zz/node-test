@@ -18,6 +18,7 @@ def full_deploy():
 @task
 def start_node():
 	sudo("systemctl start nginx.service")
+	sudo("systemctl start httpd.service")
 	sudo("systemctl enable /srv/node-test/node-test.service")
 	sudo("systemctl start node-test.service")
 
