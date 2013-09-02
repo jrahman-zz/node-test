@@ -3,19 +3,34 @@
 #
 from fabric.api import *
 
+
 src_directory="/home/rahmanj/node-test/src/"
 dest_directory="/srv/node-test/"
+target_directory="/srv/"
+repo="ssh://git@github.com/jrahman/node-test.git"
+
+@task
+def full_deploy():
+	execute(deploy_files)
+	excute(start_node)
 
 @task
 def start_node():
+	sudo("systemctl enable /srv/node-test/node-test.service")
 	sudo("systemctl start node-test.service")
 
 @task
-def copy_application():
-	cd(dest_directory)
-	sudo("cp " .  src_directory . "node-test.js " . dest_directory)
+def deploy_files():
+	with cd("/tmp"):
+		run("rm -rf /tmp/node-test")
+		run('ls')
+		run("git clone " + repo)
+		sudo("cp node-test/src/node-test.{js,service} " + dest_directory)
+		sudo("cp node-test/src/node-test-nginx.conf /etc/nginx/")
 
 @task
+def cleanup():
+	run("rm -rf /tmp/node-test")
 
 
 
