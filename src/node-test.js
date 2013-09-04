@@ -15,7 +15,7 @@ http.createServer(function(request, response) {
 	response.writeHead(200, {
 		'Content-Type': 'text/plain'
 	});
-	response.end("Hello World! " + _get['echo']);
+	response.end("Hello World! Echo=" + _get['echo']);
 
 }).listen(8080);
 
