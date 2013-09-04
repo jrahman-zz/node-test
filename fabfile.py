@@ -30,8 +30,8 @@ def deploy_files():
 		run("git clone " + repo)
 		run("ls node-test/src/")
 		sudo("cp node-test/src/node-test.{js,service} " + dest_directory)
-		sudo("cp -f node-test/src/node-test-nginx.conf /etc/nginx/conf.d/")
-		sudo("cp -f node-test/src/node-test-apache.conf /etc/httpd/conf.d/")
+		sudo("cp node-test/src/node-test-nginx.conf /etc/nginx/conf.d/")
+		sudo("cp node-test/src/node-test-apache.conf /etc/httpd/conf.d/")
 
 @task
 def cleanup():
